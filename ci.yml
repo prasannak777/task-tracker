@@ -1,0 +1,37 @@
+name: CI Workflow for Task Tracker
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22.12.0' 
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests with code coverage
+        run: npm run test -- --watch=false --code-coverage
+
+      - name: Upload code coverage results
+        uses: actions/upload-artifact@v3
+        with:
+          name: lcov-report
+          path: coverage/test-tracker/lcov-report
+
+      - name: Show coverage results
+        run: cat coverage/test-tracker/lcov-report/index.html

@@ -1,0 +1,11 @@
+<div class="card my-2">
+    <div class="card-body">
+        <h5 class="card-title">{{ task.title }}</h5>
+        <p class="card-text">{{ task.description }}</p>
+        <div>
+            <span class="badge" [class.bg-success]="task.completed" [class.bg-secondary]="!task.completed">
+                {{ task.completed ? 'Completed' : 'Pending' }}
+            </span>
+        </div>
+    </div>
+</div>
