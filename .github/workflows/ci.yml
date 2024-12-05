@@ -18,8 +18,7 @@ jobs:
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
-        with:
-          node-version: '22.12.0' 
+        with: node-version: '20'
 
       - name: Install dependencies
         run: npm install
@@ -27,11 +26,11 @@ jobs:
       - name: Run tests with code coverage
         run: npm run test -- --no-watch --browsers=ChromeHeadlessNoSandbox --code-coverage
 
-      - name: Upload code coverage results
+      - name: Upload coverage report
         uses: actions/upload-artifact@v3
         with:
-          name: lcov-report
-          path: coverage/test-tracker/lcov-report
+          name: coverage-report
+          path: coverage/task-tracker/lcov-report/
 
-      - name: Show coverage results
-        run: cat coverage/test-tracker/lcov-report/index.html
+      - name: Show Coverage Report
+        run: ls -R coverage/
